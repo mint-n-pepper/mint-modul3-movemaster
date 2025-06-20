@@ -1,0 +1,30 @@
+{
+    "name": "CYBA-MOVEMaster",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "radio": "*",
+        "microphone": "*",
+        "pxt-kitronik-move-motor": "github:kitronikltd/pxt-kitronik-move-motor#v0.4.17"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "targetVersions": {
+        "branch": "v6.0.24",
+        "tag": "v6.0.24",
+        "commits": "https://github.com/microsoft/pxt-microbit/commits/4e2539ee49fbde6d707f8423f7fdef82d49a6a40",
+        "target": "7.0.61",
+        "pxt": "9.0.14",
+        "targetId": "microbit"
+    },
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "blocksprj"
+}
