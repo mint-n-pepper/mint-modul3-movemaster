@@ -145,7 +145,6 @@ basic.showLeds(`
     . . # . .
     . # # # .
     `)
-singal_Channel = 2
 radio.setGroup(singal_Channel)
 speed = 50
 moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
