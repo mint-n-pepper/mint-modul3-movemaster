@@ -104,20 +104,25 @@ input.onLogoEvent(TouchButtonEvent.Pressed, function () {
 })
 radio.onReceivedValue(function (name, value) {
     if (name == "motor") {
-        if (value == 3) {
-            Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Forward, speed)
-        } else if (value == 1) {
-            Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Left, speed)
+        if (value == 1) {
+            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorLeft, Kitronik_Move_Motor.MotorDirection.Reverse, speed)
+            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorRight, Kitronik_Move_Motor.MotorDirection.Reverse, speed)
         } else if (value == 2) {
-            Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Right, speed)
+            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorLeft, Kitronik_Move_Motor.MotorDirection.Reverse, speed)
+        } else if (value == 3) {
+            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorRight, Kitronik_Move_Motor.MotorDirection.Reverse, speed)
         } else if (value == 4) {
-            Kitronik_Move_Motor.move(Kitronik_Move_Motor.DriveDirections.Reverse, speed)
+            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorLeft, Kitronik_Move_Motor.MotorDirection.Forward, speed)
+            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorRight, Kitronik_Move_Motor.MotorDirection.Forward, speed)
         } else if (value == 0) {
             Kitronik_Move_Motor.stop()
         }
     }
-    if (name.includes("r-led")) {
-        moveMotorZIP.setZipLedColor(parseFloat(name.substr(5, 1)), colors[value])
+    if (name.includes("led")) {
+        moveMotorZIP.setZipLedColor(0, colors[value])
+        moveMotorZIP.setZipLedColor(1, colors[value])
+        moveMotorZIP.setZipLedColor(2, colors[value])
+        moveMotorZIP.setZipLedColor(3, colors[value])
         moveMotorZIP.show()
     }
     if (name == "radiogrp") {
@@ -140,7 +145,7 @@ basic.showLeds(`
     . . # . .
     . # # # .
     `)
-singal_Channel = 1
+singal_Channel = 2
 radio.setGroup(singal_Channel)
 speed = 50
 moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
