@@ -1,107 +1,3 @@
-input.onLogoEvent(TouchButtonEvent.Pressed, function () {
-    singal_Channel += 1
-    if (singal_Channel == 1 || lastChannelState == 1) {
-        lastChannelState = 0
-        singal_Channel = 1
-        basic.showLeds(`
-            . . # . .
-            . # # . .
-            . . # . .
-            . . # . .
-            . # # # .
-            `)
-    } else if (singal_Channel == 2) {
-        basic.showLeds(`
-            . # # # .
-            . . . # .
-            . # # # .
-            . # . . .
-            . # # # .
-            `)
-    } else if (singal_Channel == 3) {
-        basic.showLeds(`
-            . # # # .
-            . . . # .
-            . # # # .
-            . . . # .
-            . # # # .
-            `)
-    } else if (singal_Channel == 4) {
-        basic.showLeds(`
-            . # . # .
-            . # . # .
-            . # # # .
-            . . . # .
-            . . . # .
-            `)
-    } else if (singal_Channel == 5) {
-        basic.showLeds(`
-            . # # # .
-            . # . . .
-            . # # # .
-            . . . # .
-            . # # # .
-            `)
-    } else if (singal_Channel == 6) {
-        basic.showLeds(`
-            . # # # .
-            . # . . .
-            . # # # .
-            . # . # .
-            . # # # .
-            `)
-    } else if (singal_Channel == 7) {
-        basic.showLeds(`
-            . # # # .
-            . # . # .
-            . . . # .
-            . . . # .
-            . . . # .
-            `)
-    } else if (singal_Channel == 8) {
-        basic.showLeds(`
-            . # # # .
-            . # . # .
-            . # # # .
-            . # . # .
-            . # # # .
-            `)
-    } else if (singal_Channel == 9) {
-        basic.showLeds(`
-            . # # # .
-            . # . # .
-            . # # # .
-            . . . # .
-            . # # # .
-            `)
-    } else if (singal_Channel == 10) {
-        basic.showLeds(`
-            # . . # .
-            # . # . #
-            # . # . #
-            # . # . #
-            # . . # .
-            `)
-    } else if (singal_Channel == 11) {
-        basic.showLeds(`
-            # . . # .
-            # . . # .
-            # . . # .
-            # . . # .
-            # . . # .
-            `)
-    } else if (singal_Channel == 12) {
-        lastChannelState = 1
-        basic.showLeds(`
-            # . # # #
-            # . . . #
-            # . # # #
-            # . # . .
-            # . # # #
-            `)
-    }
-    radio.setGroup(singal_Channel)
-})
 radio.onReceivedValue(function (name, value) {
     if (name == "motor") {
         if (value == 1) {
@@ -112,8 +8,8 @@ radio.onReceivedValue(function (name, value) {
         } else if (value == 3) {
             Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorRight, Kitronik_Move_Motor.MotorDirection.Reverse, speed)
         } else if (value == 4) {
-            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorLeft, Kitronik_Move_Motor.MotorDirection.Forward, speed)
-            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorRight, Kitronik_Move_Motor.MotorDirection.Forward, speed)
+            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorLeft, Kitronik_Move_Motor.MotorDirection.Forward, speed * 0.8)
+            Kitronik_Move_Motor.motorOn(Kitronik_Move_Motor.Motors.MotorRight, Kitronik_Move_Motor.MotorDirection.Forward, speed * 0.8)
         } else if (value == 0) {
             Kitronik_Move_Motor.stop()
         }
@@ -133,19 +29,10 @@ radio.onReceivedValue(function (name, value) {
     }
 })
 let radiogrp = 0
-let lastChannelState = 0
 let colors: number[] = []
 let moveMotorZIP: Kitronik_Move_Motor.MoveMotorZIP = null
 let speed = 0
-let singal_Channel = 0
-basic.showLeds(`
-    . . # . .
-    . # # . .
-    . . # . .
-    . . # . .
-    . # # # .
-    `)
-radio.setGroup(singal_Channel)
+radio.setGroup(8)
 speed = 50
 moveMotorZIP = Kitronik_Move_Motor.createMoveMotorZIPLED(4)
 Kitronik_Move_Motor.brakeLightsOff()
@@ -164,3 +51,12 @@ colors = [
 16777215,
 0
 ]
+basic.forever(function () {
+    basic.showLeds(`
+        . # # # .
+        . # . # .
+        . # # # .
+        . # . # .
+        . # # # .
+        `)
+})
